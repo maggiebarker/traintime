@@ -1,8 +1,14 @@
 body {
 	background-color: #147f14;
 }
+
+.jumbotron {
+	background: url('../images/leaves.jpg');
+}
 .header {
 	text-align: center;
+	font-size: 56px;
+	color: white;
 }
 
 #schedule {
