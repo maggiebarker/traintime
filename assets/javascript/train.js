@@ -10,3 +10,15 @@
   firebase.initializeApp(config);
 
   var database = firebase.database();
+
+  //dynamically populate table data from arrays
+
+  //add data to arrays with .on('click') events
+
+  //store new data in firebase? how exactly does firebase figure into this assignment?  
+  //are we wanting to keep added trains in the table?  on that note, who is "administrator" from assignment criteria?
+
+  //establish arrival-time countdown for each train based on frequency updating every minute, 
+  //restart count when time is reached?  using moment.js for this?  
+
+  //
