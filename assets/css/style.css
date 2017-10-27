@@ -1,0 +1,16 @@
+body {
+	background-color: #147f14;
+}
+.header {
+	text-align: center;
+}
+
+#schedule {
+	border: 1px solid black;
+	padding: 20px;
+}
+
+#addTrain {
+	border: 1px solid black;
+	padding: 20px;
+}
