@@ -21,7 +21,6 @@
   //var eta = "";
 
   //send data to database with .on("click")
-
   $("#submit").on("click", function() {
     event.preventDefault();
     $("#tableData").empty();
@@ -39,15 +38,12 @@
     });
   })
 
-  //view database data in browser
-
+//view database data in browser
   database.ref().on("value", function(snapshot) {
     console.log(snapshot.val());
-  })
 
-  //append database data to table display  
-  //are we wanting to keep added trains in the table?  on that note, who is "administrator" from assignment criteria?
-
+//append database data to table display  
+//are we wanting to keep added trains in the table?  on that note, who is "administrator" from assignment criteria?
   database.ref().on("child_added", function(snapshot){
 
     var table = document.getElementById("tableData");
@@ -65,10 +61,12 @@
     nextCell.innerHTML = ("Next Train"); 
     etaCell.innerHTML = ("ETA"); 
   })
+})
 
 //establish nextArrival by doing some math. with jQuery.  firstTrain time + frequency gives us the 2nd train arrival.  
 //so if a train starts at 6 and the frequency is 20mins, then the second train will come at 6:20.  we need a formula
 //should this be moment(snapshot.val().firsttrain, "hh:mm")?
+//should all this be global?
    var firstTrainConverted = moment(firstTrain, "hh:mm").subtract(1, "years");
    console.log(firstTrainConverted);
 
@@ -84,7 +82,6 @@
   console.log(remainder);
 
 // get the eta by comparing the current time to the next arrival time and counting down by minutes
-
   var eta = frequency - remainder;
   console.log("ETA: " + eta)
 

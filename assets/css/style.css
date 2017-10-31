@@ -1,5 +1,5 @@
 body {
-	background-color: #147f14;
+	background-color: #5b9b36;
 }
 
 .jumbotron {
@@ -14,7 +14,7 @@ body {
 }
 
 #schedule {
-	border: 1px solid black;
+	border: 2px solid black;
 	padding: 20px;
 }
 
@@ -23,6 +23,13 @@ body {
 }
 
 #addTrain {
-	border: 1px solid black;
+	border: 2px solid black;
 	padding: 20px;
+}
+
+footer{
+	padding: 20px;
+	text-align: center;
+	font-size: 14px;
+	color: white;
 }

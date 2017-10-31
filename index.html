@@ -41,18 +41,12 @@
 <br>  -->
 
 <div class = "container" id = "main">
-  
-    <div class = "row" id>
-      <div class = "col-sm-1"></div>
-      <div class = "col-sm-10" id = "tableHeader"><h3>Train Schedule</h3></div>
-      <div class = "col-sm-1"></div>
-    </div>
 
     <div class = "row">
       <div class = "col-sm-1"></div>
-        <div class = "col-sm-10">
+        <div class = "col-sm-10" id = "schedule"><h3>Train Schedule</h3>
 <!-- Need a table -->
-        <table class="table table-striped" id = "schedule">
+        <table class="table table-striped">
           <thead class="thead-dark">
             <tr>
               <th scope="col">Train Name</th>
@@ -72,17 +66,11 @@
 <br>
 <!-- Need a form-->
 
-   <div class = "row">
-      <div class = "col-sm-1"></div>
-      <div class = "col-sm-10" id = "formHeader"><h3>Add a Train</h3></div>
-      <div class = "col-sm-1"></div>
-    </div>
-
   <div class = "row">
     <div class = "col-sm-1"></div>
-      <div class = "col-sm-10">
+      <div class = "col-sm-10" id = "addTrain"><h3>Add a Train<hr></h3>
         <form>
-          <div class="form-group" id = "addTrain">
+          <div class="form-group">
             <label class="col-form-label" for="trainName">Train Name</label>
             <input type="text" class="form-control" id="trainName" placeholder="Train Name">
             <label class="col-form-label" for="destination">Destination</label>
@@ -96,10 +84,12 @@
           </div>
         </form>
       </div>
-    <div class = "col-sm-1"></div>
+    <div class = "col-sm-1"></div><br>
 </div>
 
-</div>
+</div> 
+
+<footer> &copy copyright 2017 Maggie Barker</footer>
 
 <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
 <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
