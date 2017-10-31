@@ -18,7 +18,7 @@
   </div>
 </div>
 
-<!-- Want a nav bar. Feeling ambitious. -->
+<!-- Want a nav bar. Feeling ambitious. Only try to make this work once I've finished the assignment requirements
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
     </ul>
   </div>
 </nav>
-<br>
+<br>  -->
 
 <div class = "container" id = "main">
   
@@ -62,42 +62,8 @@
               <th scope="col">Minutes Away</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Rohan-Gondor Express</th>
-                <td>Edoras</td>
-                <td>15</td>
-                <td>--</td>
-                <td>--</td>
-            </tr>
-            <tr>
-              <th scope="row">Lothlorien Parkway Loop</th>
-                <td>City of Trees</td>
-                <td>360</td>
-                <td>--</td>
-                <td>--</td>
-            </tr>
-            <tr>
-              <th scope="row">Moria Metro and Subway</th>
-                <td>Doors of Durin</td>
-                <td>1440</td>
-                <td>--</td>
-                <td>--</td>
-            </tr>
-            <tr>
-              <th scope="row">Rivendell Railway</th>
-                <td>Rivendell</td>
-                <td>180</td>
-                <td>--</td>
-                <td>--</td>
-            </tr>
-            <tr>
-              <th scope="row">Shire Trolley</th>
-                <td>Brandybuck</td>
-                <td>30</td>
-                <td>--</td>
-                <td>--</td>
-            </tr>
+          <tbody id = "tableData">
+            <tr></tr>
           </tbody>
         </table>
         </div>
@@ -121,12 +87,12 @@
             <input type="text" class="form-control" id="trainName" placeholder="Train Name">
             <label class="col-form-label" for="destination">Destination</label>
             <input type="text" class="form-control" id="destination" placeholder="Destination">
-            <label class="col-form-label" for="trainTime">Train Time (HH:mm) Military Time</label>
-            <input type="text" class="form-control" id="trainTime" placeholder="Train Time">
-            <label class="col-form-label" for="frequency">Frequency</label>
+            <label class="col-form-label" for="firstTrain">First Train Time (HH:mm) Military Time</label>
+            <input type="text" class="form-control" id="firstTrain" placeholder="First Train">
+            <label class="col-form-label" for="frequency">Frequency (mins)</label>
             <input type="text" class="form-control" id="frequency" placeholder="Frequency (min)">
             <br>
-            <button type="button" class="btn btn-secondary" id="submit">Submit</button>
+            <input id="submit" type="button" class="btn btn-secondary" value="Submit">
           </div>
         </form>
       </div>
@@ -136,6 +102,8 @@
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+
 <script type="text/javascript" src="assets/javascript/train.js"></script>
 </body>
 </html>

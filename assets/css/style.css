@@ -4,6 +4,7 @@ body {
 
 .jumbotron {
 	background: url('../images/leaves.jpg');
+	border-bottom: 2px solid white;
 }
 .header {
 	text-align: center;
@@ -15,6 +16,10 @@ body {
 #schedule {
 	border: 1px solid black;
 	padding: 20px;
+}
+
+#tableData{
+	color: white;
 }
 
 #addTrain {
