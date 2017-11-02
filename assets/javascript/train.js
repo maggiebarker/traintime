@@ -60,22 +60,26 @@
     freqCell.innerHTML = (snapshot.val().frequency); 
     nextCell.innerHTML = ("Next Train"); 
     etaCell.innerHTML = ("ETA"); 
-  })
-})
 
-//establish nextArrival by doing some math. with jQuery.  firstTrain time + frequency gives us the 2nd train arrival.  
+
+//establish nextCell data by doing some math. with jQuery.  firstTrain time + frequency gives us the 2nd train arrival.  
 //so if a train starts at 6 and the frequency is 20mins, then the second train will come at 6:20.  we need a formula
 //should this be moment(snapshot.val().firsttrain, "hh:mm")?
 //should all this be global?
-   var firstTrainConverted = moment(firstTrain, "hh:mm").subtract(1, "years");
-   console.log(firstTrainConverted);
 
 //establish the current time, will be necessary for determining eta
   var now = moment();
   console.log("Current Time: " +(moment(now).format("hh:mm")));
 
+//figure out when the next train will be.  
+//how do we make this go all day?  nextTrain = firstTrain + frequency, 
+//then the train after that would be nextNextTrain = nextTrain + frequency, right?  
+// if it's much later in the day, if we take (now - firstTrain)/frequency, we get how many trains there have been all day
+//
+  var nextTrain = firstTrain + frequency;  
+
 //what is the difference between now and the next train?
-  var diffTime = moment().diff(moment(firstTrainConverted), "minutes");
+  var diffTime = moment().diff(moment(trainTime), "minutes");
   console.log("Time Difference: " + diffTime);
 
   var remainder = diffTime % frequency;
@@ -90,3 +94,5 @@ console.log("Arrival Time: " + moment(next).format("hh:mm"));
 
 //add the next and eta to the table by setting nextCell and etaCell = to next and eta
 
+  })
+})
