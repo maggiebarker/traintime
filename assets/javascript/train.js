@@ -66,20 +66,26 @@
 //so if a train starts at 6 and the frequency is 20mins, then the second train will come at 6:20.  we need a formula
 //should this be moment(snapshot.val().firsttrain, "hh:mm")?
 //should all this be global?
+//do we need to look at how frequency is formatted?  
 
 //establish the current time, will be necessary for determining eta
   var now = moment();
   console.log("Current Time: " +(moment(now).format("hh:mm")));
 
 //figure out when the next train will be.  
-//how do we make this go all day?  nextTrain = firstTrain + frequency, 
+//how do we make this go all day?  nextTrain = firstTrain + frequency 
 //then the train after that would be nextNextTrain = nextTrain + frequency, right?  
-// if it's much later in the day, if we take (now - firstTrain)/frequency, we get how many trains there have been all day
-//
-  var nextTrain = firstTrain + frequency;  
+//if it's much later in the day, if we take (now - firstTrain)/frequency, we get how many trains there have been all day
+
+var convertedTime = moment(firstTrain, "hh:mm").subtract(1, "years");
+console.log(convertedTime);
+
+
+var nextTrain = moment(firstTrain, "hh:mm").add(frequency, "minutes"); 
+console.log(nextTrain);
 
 //what is the difference between now and the next train?
-  var diffTime = moment().diff(moment(trainTime), "minutes");
+  var diffTime = moment().diff(moment(convertedTime), "minutes");
   console.log("Time Difference: " + diffTime);
 
   var remainder = diffTime % frequency;
@@ -89,10 +95,36 @@
   var eta = frequency - remainder;
   console.log("ETA: " + eta)
 
-var next = moment().add(eta, "minutes");
-console.log("Arrival Time: " + moment(next).format("hh:mm"));
+var nextArrival = moment().add(eta, "minutes");
+console.log("Arrival Time: " + moment(nextArrival).format("hh:mm"));
 
 //add the next and eta to the table by setting nextCell and etaCell = to next and eta
 
+
+//build a timer into the etaCell that decrements by the minute
+
+//this is reading nextArrival as now, not what I want
+console.log(moment(nextArrival).toNow());  
+
+
+//Below is an adaptation of a vanilla js/jquery timer that I wrote for another project. This assignment needs moment.js.  
+// (((var countDown = moment(nextArrival, "mm");
+//       // Update the count down every minute
+// var x = setInterval(function() {
+//       // Get todays date and time (like above)
+// var now = moment();
+//       // Find the distance between now and the count down time
+// var distance = countDown - now;
+//      // Time calculations for minutes
+// var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+//      // Display the result in the etaCell
+//   etaCell.innerHTML(minutes);
+//     // If the count down is finished, write some text 
+//   if (distance < 0) {
+//     clearInterval(x);
+//     etaCell.innerHTML("Boarding Now");))))
+
+
   })
-})
+},
+ );
