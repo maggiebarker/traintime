@@ -108,7 +108,7 @@ console.log(moment(nextArrival).toNow());
 
 
 //Below is an adaptation of a vanilla js/jquery timer that I wrote for another project. This assignment needs moment.js.  
-// (((var countDown = moment(nextArrival, "mm");
+// var countDown = moment(nextArrival, "mm");
 //       // Update the count down every minute
 // var x = setInterval(function() {
 //       // Get todays date and time (like above)
@@ -122,7 +122,7 @@ console.log(moment(nextArrival).toNow());
 //     // If the count down is finished, write some text 
 //   if (distance < 0) {
 //     clearInterval(x);
-//     etaCell.innerHTML("Boarding Now");))))
+//     etaCell.innerHTML("Boarding Now");
 
 
   })
