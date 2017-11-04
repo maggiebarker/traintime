@@ -89,8 +89,8 @@
           // If the count down is finished, write some text
         if (eta == 0) {
           clearInterval(x);
-          startCountdown()
-          boarding()
+          startCountdown();
+          boarding();
         }
       }
       // Update the count down every minute
@@ -104,12 +104,12 @@
         console.log(remainder, "this is our remainder");
         eta = frequency - remainder;
         nextArrival = moment().add(eta, "minutes");
-        nextTrain = moment(nextArrival).format("HH:mm")
+        nextTrain = moment(nextArrival).format("HH:mm");
         nextCell.innerHTML = (nextTrain);
         etaCell.innerHTML = (eta);
-        x = setInterval(trainCount, 60000)
+        x = setInterval(trainCount, 60000);
       }
-      startCountdown()
+      startCountdown();
 
     trainCell.innerHTML = (snapshot.val().trainName);
     destCell.innerHTML = (snapshot.val().destination);
