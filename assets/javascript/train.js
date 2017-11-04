@@ -16,14 +16,11 @@
   var destination = "";
   var firstTrain = "";
   var frequency = 0;
-  
-  //var nextArrival = "";
-  //var eta = "";
 
   //send data to database with .on("click")
-  $("#submit").on("click", function() {
+  $("#submit").on("click", function(event) {
     event.preventDefault();
-    $("#tableData").empty();
+    // $("#tableData").empty();
 
     trainName = $("#trainName").val().trim();
     destination = $("#destination").val().trim();
@@ -39,12 +36,15 @@
   })
 
 //view database data in browser
-  database.ref().on("value", function(snapshot) {
-    console.log(snapshot.val());
+  // database.ref().on("value", function(snapshot) {
+  //   console.log(snapshot.val());
 
-//append database data to table display  
+//append database data to table display
 //are we wanting to keep added trains in the table?  on that note, who is "administrator" from assignment criteria?
   database.ref().on("child_added", function(snapshot){
+    console.log(snapshot.val());
+    var trainTime = snapshot.val().firstTrain;
+    var frequency = parseInt(snapshot.val().frequency);
 
     var table = document.getElementById("tableData");
     var row = table.insertRow(0);
@@ -55,76 +55,65 @@
     var nextCell = row.insertCell(3);
     var etaCell = row.insertCell(4);
 
-    trainCell.innerHTML = (snapshot.val().trainName); 
-    destCell.innerHTML = (snapshot.val().destination); 
-    freqCell.innerHTML = (snapshot.val().frequency); 
-    nextCell.innerHTML = ("Next Train"); 
-    etaCell.innerHTML = ("ETA"); 
+    var convertedTime = moment(trainTime, "HH:mm").subtract(1, "years");
+    console.log(convertedTime, "This is our convertedTime");
 
 
-//establish nextCell data by doing some math. with jQuery.  firstTrain time + frequency gives us the 2nd train arrival.  
-//so if a train starts at 6 and the frequency is 20mins, then the second train will come at 6:20.  we need a formula
-//should this be moment(snapshot.val().firsttrain, "hh:mm")?
-//should all this be global?
-//do we need to look at how frequency is formatted?  
+    // var nextTrain = moment(firstTrain, "hh:mm").add(frequency, "minutes");
+    // console.log(nextTrain);
+      // var now = moment();
+      // console.log("Current Time: " +(moment(now).format("HH:mm")));
 
-//establish the current time, will be necessary for determining eta
-  var now = moment();
-  console.log("Current Time: " +(moment(now).format("hh:mm")));
+    //what is the difference between now and the next train?
+      var diffTime = moment().diff(moment(convertedTime), "minutes");
+      console.log("Time Difference: " + diffTime);
 
-//figure out when the next train will be.  
-//how do we make this go all day?  nextTrain = firstTrain + frequency 
-//then the train after that would be nextNextTrain = nextTrain + frequency, right?  
-//if it's much later in the day, if we take (now - firstTrain)/frequency, we get how many trains there have been all day
+      var remainder = diffTime % frequency;
+      console.log(remainder, "this is our remainder");
 
-var convertedTime = moment(firstTrain, "hh:mm").subtract(1, "years");
-console.log(convertedTime);
+    // get the eta by comparing the current time to the next arrival time and counting down by minutes
+      var eta = frequency - remainder;
+      console.log("ETA: " + eta);
+      var x;
+      var nextArrival = moment().add(eta, "minutes");
+      console.log("Arrival Time: " + moment(nextArrival).format("hh:mm"));
+      var nextTrain = moment(nextArrival).format("HH:mm")
 
+      function boarding() {
+        etaCell.innerHTML = "Boarding Now";
+      }
+      function trainCount() {
+        var minutes = eta--
+           // Display the result in the etaCell
+        etaCell.innerHTML = minutes;
+          // If the count down is finished, write some text
+        if (eta == 0) {
+          clearInterval(x);
+          startCountdown()
+          boarding()
+        }
+      }
+      // Update the count down every minute
+      function startCountdown(){
+        convertedTime = moment(trainTime, "hh:mm").subtract(1, "years");
+        console.log(convertedTime, "This is our convertedTime");
 
-var nextTrain = moment(firstTrain, "hh:mm").add(frequency, "minutes"); 
-console.log(nextTrain);
+        diffTime = moment().diff(moment(convertedTime), "minutes");
 
-//what is the difference between now and the next train?
-  var diffTime = moment().diff(moment(convertedTime), "minutes");
-  console.log("Time Difference: " + diffTime);
+        remainder = diffTime % frequency;
+        console.log(remainder, "this is our remainder");
+        eta = frequency - remainder;
+        nextArrival = moment().add(eta, "minutes");
+        nextTrain = moment(nextArrival).format("HH:mm")
+        nextCell.innerHTML = (nextTrain);
+        etaCell.innerHTML = (eta);
+        x = setInterval(trainCount, 60000)
+      }
+      startCountdown()
 
-  var remainder = diffTime % frequency;
-  console.log(remainder);
-
-// get the eta by comparing the current time to the next arrival time and counting down by minutes
-  var eta = frequency - remainder;
-  console.log("ETA: " + eta)
-
-var nextArrival = moment().add(eta, "minutes");
-console.log("Arrival Time: " + moment(nextArrival).format("hh:mm"));
-
-//add the next and eta to the table by setting nextCell and etaCell = to next and eta
-
-
-//build a timer into the etaCell that decrements by the minute
-
-//this is reading nextArrival as now, not what I want
-console.log(moment(nextArrival).toNow());  
-
-
-//Below is an adaptation of a vanilla js/jquery timer that I wrote for another project. This assignment needs moment.js.  
-// var countDown = moment(nextArrival, "mm");
-//       // Update the count down every minute
-// var x = setInterval(function() {
-//       // Get todays date and time (like above)
-// var now = moment();
-//       // Find the distance between now and the count down time
-// var distance = countDown - now;
-//      // Time calculations for minutes
-// var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-//      // Display the result in the etaCell
-//   etaCell.innerHTML(minutes);
-//     // If the count down is finished, write some text 
-//   if (distance < 0) {
-//     clearInterval(x);
-//     etaCell.innerHTML("Boarding Now");
-
-
+    trainCell.innerHTML = (snapshot.val().trainName);
+    destCell.innerHTML = (snapshot.val().destination);
+    freqCell.innerHTML = (snapshot.val().frequency);
+    nextCell.innerHTML = (nextTrain);
+    etaCell.innerHTML = (eta);
   })
-},
- );
